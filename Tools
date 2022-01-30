@@ -1,0 +1,35 @@
+Here are some of the tools that we use when we perform Live Recon Passive ONLY on Twitch:
+
+Recon-ng https://github.com/lanmaster53/recon-ng
+httpx https://github.com/projectdiscovery/httpx
+isup.sh https://github.com/gitnepal/isup
+Arjun https://github.com/s0md3v/Arjun
+jSQL https://github.com/ron190/jsql-injection
+Smuggler https://github.com/defparam/smuggler
+Sn1per https://github.com/1N3/Sn1per
+Spiderfoot https://github.com/smicallef/spiderfoot
+Nuclei https://github.com/projectdiscovery/nuclei
+Jaeles https://github.com/jaeles-project/jaeles
+ChopChop https://github.com/michelin/ChopChop
+Inception https://github.com/proabiral/inception
+Eyewitness https://github.com/FortyNorthSecurity/EyeWitness
+Meg https://github.com/tomnomnom/meg
+Gau - Get All Urls https://github.com/lc/gau
+Snallygaster https://github.com/hannob/snallygaster
+NMAP https://github.com/nmap/nmap
+Waybackurls https://github.com/tomnomnom/waybackurls
+Gotty https://github.com/yudai/gotty
+GF https://github.com/tomnomnom/gf
+GF Patterns https://github.com/1ndianl33t/Gf-Patterns
+Paramspider https://github.com/devanshbatham/ParamSpider
+XSSER https://github.com/epsylon/xsser
+UPDOG https://github.com/sc0tfree/updog
+JSScanner https://github.com/dark-warlord14/JSScanner
+Takeover https://github.com/m4ll0k/takeover
+Keyhacks https://github.com/streaak/keyhacks
+S3 Bucket AIO Pwn https://github.com/blackhatethicalhacking/s3-buckets-aio-pwn
+BHEH Sub Pwner Recon https://github.com/blackhatethicalhacking/bheh-sub-pwner
+GitLeaks https://github.com/zricethezav/gitleaks
+Domain-2IP-Converter https://github.com/blackhatethicalhacking/Domain2IP-Converter
+Dalfox https://github.com/hahwul/dalfox
+Log4j Scanner https://github.com/Black-Hat-Ethical-Hacking/log4j-scan
