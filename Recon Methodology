@@ -1,0 +1,101 @@
+
+Project Notes & Recon Approach Techniques:
+
+-Create Folders (Subdomains, URLS, IPs)
+
+- Recon Passively for subdomains/ips/ports/params/js
+
+-Export lists from recon-ng and use httpx to create urls/probing (urls/IPs/Subdomains)
+
+-Use isup.sh to filter ips : 
+
+1. Use Nmap Aggressive Scan & Save to XML to Import into Bounty Platform:
+
+nmap CIDR -sSV -A -T4 -O -Pn -v -F -oX nmap_output.xml
+
+nmap -iL ips.txt -sSV -A -T4 -O -Pn -v -F -oX nmap_output.xml
+
+Extra Sn1per - WebApp Mode:
+
+: sniper -f /root/Desktop/Bounty/Airbnb/ips/valid-airbnb_ips.txt -m massweb -w airbnbtestweb
+
+2. Check for Domain TakeOver with Takeover by M4llok
+
+Takeover Tool: takeover -l sub_domains.txt -v -t 10
+
+3. Check for open Amazon S3 buckets
+Can use nuclei -l urls.txt -t /root/nuclei-templates/technologies/s3-detect.yaml
+
+Attack Buckets:
+https://github.com/blackhatethicalhacking/s3-buckets-aio-pwn
+
+4. Use ParamSpider to Hunt for URLS with Parameters automatically from wayback machine - You can also use Arjun, we are switching to ParamSpider as part of building a workflow
+
+python3 paramspider.py --domain DOMAINNAME.com --exclude woff,png,svg,php,jpg --output /root/Desktop/Bounty/params.txt
+
+Technique to Clean Params from XSS: -
+sed 's/unix/linux/g' reconfile.txt
+
+5. Use Smuggler on URLs list to test for http requests that could desync, and posting multiple chunked requests to smuggle external sources so the backend server will forward the request with cookies, data to the front end server
+
+cat list_of_urls.txt | python3 smuggler.py -l /root/location.txt
+
+Bonus **
+A) Eyewitness to take Screenshots of all URLS, Will run on VPS only! New!
+
+eyewitness -f /root/Desktop/Bounty/Client/urls.txt
+
+B) Pattern Check Example for Results with gf & gf-patterns:
+cat /root/Desktop/Bounty/params.txt | gf xss | sed 's/FUZZ/ /g' >> /root/Desktop/Bounty/xss_params_forMeg.txt
+
+6. Use Meg with Seclist fuzzing for Links: (Gathered from gau/arjun/paramspider/gf)
+For Meg, we must remove the ‘FUZZ’ from paramspider and replace it with a null character:
+
+: sed 's/FUZZ//g' reconfile.txt
+
+meg -v LFI-gracefulsecurity-linux.txt /root/Desktop/Bounty/urls.txt /root/Desktop/urls.txt -s 200
+
+7. Jscanner
+
+Scanning Javascript Files for Endpoints, Secrets, Hardcoded credentials,IDOR, Openredirect and more
+
+Paste URLS into alive.txt
+
+Run script alive.txt - Examine the results using GF advanced patterns
+
+cat * /.txt cat /.js | gf api-keys cat //.txt | gf ssrf > /root/Desktop/ssrf.txt
+
+Scan a Directory with Javascripts, Files, Json Etc.. for Secrets!
+
+gitleaks --path=/directory -v --no-git
+
+Scan a File with Any Extension for Secrets!
+
+gitleaks --path=/file.xxx -v --no-git
+
+8. Find XSS Vulnerabilities from Paramspider & Dalfox !
+
+Since we have params urls from paramspider, dalfox needs to know where to inject, and you can define it with XSS instead of FUZZ, so here is a command to replace this from the result, and create a new list to be used on dalfox.
+
+sed 's/FUZZ/XSS/g' reconfile.txt
+
+You are now ready for parsing the urls into dalfox in pipe mode:
+
+cat /root/Desktop/Bounty/xss_params.txt | dalfox pipe | cut -d " " -f 2 > output.txt
+
+or
+
+dalfox file /root/Desktop/Bounty/xss_params.txt | cut -d " " -f 2 > output.txt
+
+For Deeper Attacks add this:
+--deep-domxss
+
+Silence --silence Prints only PoC When found and progress
+
+9 - After Recon: ---
+When you find Keys/Tokens - Check from here:
+
+https://github.com/streaak/keyhacks
+
+                                                                                
+                                                                                10. Keep Supporting The Channel :---
