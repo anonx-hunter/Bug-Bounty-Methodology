@@ -1,0 +1,73 @@
+Checklist :
+
+1. Reconnaissance
+Gather Subdomains: Use tools like Sublist3r, Amass, or Assetfinder.
+Directory Enumeration: Use tools like Dirbuster or Gobuster.
+Technology Stack Identification: Use Wappalyzer or BuiltWith.
+
+2. Authentication
+Weak Password Policies: Test for weak password requirements.
+Brute Force: Use tools like Hydra or Burp Suite Intruder.
+Default Credentials: Check for common default credentials.
+Account Lockout Mechanisms: Test if the application locks accounts after a certain number of failed attempts.
+Multi-Factor Authentication: Ensure 2FA/MFA mechanisms are correctly implemented.
+
+3. Authorization & Access Control
+IDOR (Insecure Direct Object References): Check if you can access objects by changing the value of a parameter.
+Horizontal Privilege Escalation: Test if users can access other users' data.
+Vertical Privilege Escalation: Check if lower-privileged users can access admin functionalities.
+Role-based Access Control (RBAC): Ensure that each role can only perform actions assigned to them.
+
+4. Broken Access Control Checklist
+URL Manipulation: Modify URLs to access unauthorized resources.
+Parameter Tampering: Change parameters (e.g., user_id) to access data of other users.
+Method Overriding: Use HTTP methods (GET, POST, PUT, DELETE) to bypass restrictions.
+Access Sensitive Endpoints: Directly access admin or restricted pages.
+Forced Browsing: Attempt to access unlinked resources.
+Insecure API Endpoints: Test API endpoints for proper access controls.
+File Access Control: Check if you can access restricted files by manipulating file paths.
+
+5. Session Management
+Session Fixation: Ensure session tokens are regenerated after login.
+Session Timeout: Verify that sessions timeout after a period of inactivity.
+Secure Cookies: Ensure session cookies have Secure and HttpOnly flags.
+Logout Functionality: Ensure that the session is properly invalidated upon logout.
+
+6. Input Validation
+SQL Injection: Use tools like SQLMap to test for SQL injection vulnerabilities.
+Cross-Site Scripting (XSS): Test for reflected, stored, and DOM-based XSS.
+Command Injection: Test input fields for potential command injection.
+Server-Side Template Injection: Check if you can inject template code.
+
+7. Security Misconfigurations
+Directory Listings: Ensure directory listings are disabled.
+Default Files: Check for default files and configurations.
+Error Handling: Ensure detailed error messages are not displayed to users.
+HTTP Security Headers: Verify the presence of headers like Content-Security-Policy, X-Content-Type-Options, etc.
+
+8. Data Exposure
+Sensitive Data in URL: Ensure sensitive information is not passed in the URL.
+SSL/TLS Configuration: Check for weak SSL/TLS configurations.
+Sensitive Data Exposure: Ensure sensitive data (PII, financial data) is encrypted in transit and at rest.
+
+9. Other Common Vulnerabilities
+Cross-Site Request Forgery (CSRF): Ensure CSRF tokens are implemented and validated.
+File Upload Vulnerabilities: Test for unrestricted file uploads and ensure proper file validation.
+Business Logic Flaws: Look for flaws in the application's logic that could be exploited.
+Security Logging and Monitoring: Verify that security events are logged and monitored.
+Tools to Use:
+Burp Suite: Comprehensive tool for web application security testing.
+OWASP ZAP: An open-source tool for finding vulnerabilities in web applications.
+SQLMap: For automated SQL injection testing.
+Nmap: For network scanning and reconnaissance.
+Metasploit: For exploitation and post-exploitation tasks.
+Nikto: For web server scanning.
+WFuzz: For web application fuzzing.
+Specific Steps for Testing Broken Access Control:
+Identify Roles: List all user roles and their intended permissions.
+Test URL Access: Access URLs directly and modify parameters to access other users' data.
+Use Different HTTP Methods: Try accessing resources with different HTTP methods (GET, POST, PUT, DELETE).
+Check Hidden Inputs: Inspect hidden inputs in forms to see if they can be manipulated.
+Modify Cookies: Modify cookies to attempt to escalate privileges or access unauthorized data.
+API Testing: Use tools like Postman to test API endpoints for access control issues.
+Inspect Responses: Look for any hints in responses that might indicate access control issues.
